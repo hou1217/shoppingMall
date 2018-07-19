@@ -22,8 +22,8 @@ module.exports = {
     //环境变量
     env:{
       NODE_ENV: '"development"',
-      //API_ROOT: '"//192.168.2.209:8086"',
-      API_ROOT:'"http://media.dc.wallan-tech.com"'
+      API_ROOT: '"http://jixiaosong.dev.dc.wallan-tech.com"',
+      //API_ROOT:'"http://wander.dev.wallan.tech"'
     },
     
     /**

@@ -23,8 +23,8 @@ const router = new Router({
       },
     },
     {
-      path: '/newsDetail',
-      name: 'newsDetail',
+      path: '/Detail',
+      name: 'Detail',
       component: Detail,
       meta: {
         keepAlive: false

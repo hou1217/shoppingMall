@@ -1,14 +1,13 @@
 import Vue from 'vue'
-import ElementUI from 'element-ui';
-import 'element-ui/lib/theme-chalk/index.css'; 
+import MintUI from 'mint-ui'
+import 'mint-ui/lib/style.css'
 import App from './App'
 import router from './router'
 import Global from './config/Global'//引用文件
 import axios from 'axios';
-
-Vue.prototype.GLOBAL = Global//挂载到Vue实例上面
+Vue.use(MintUI)
+Vue.prototype.$global = Global//挂载到Vue实例上面
 Vue.prototype.$axios = axios;
-Vue.use(ElementUI, { size: 'small' });
 
 
 /* eslint-disable no-new */

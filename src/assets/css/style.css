@@ -4,7 +4,7 @@
   border: 0;
 }
 html{
-  font-family:'PingFangSC','STHeiti','Microsoft YaHei','Helvetica','Arial',sans-serif;
+  font-family:'PingFangSC-Medium','PingFangSC','STHeiti','Microsoft YaHei','Helvetica','Arial',sans-serif;
 }
 body {
   position: relative;
@@ -226,7 +226,10 @@ content.feed-list-container .list-content li{
   width: calc((100% - 9px)/2);
   /* float: left; */
   margin-bottom:10px;
+  background: #FFFFFF;
   border: 0.5px solid #eee;
+  box-shadow: 0 0 8px 0 rgba(0,0,0,0.10);
+  border-radius: 4px;
   -ms-box-sizing: border-box;
   -o-box-sizing: border-box;
   box-sizing: border-box;
@@ -307,9 +310,7 @@ content.feed-list-container .desc {
   width: 67%;
   vertical-align: middle;
 }
-content.feed-list-container .list_img_holder {
-  position: relative;
-}
+
 content.feed-list-container .list_img_holder img {
   border: none;
   display: block;
@@ -321,11 +322,7 @@ content.feed-list-container .list_img_holder img {
   -webkit-user-select: none;
   text-decoration: none;
 }
-content.feed-list-container .list_img_holder {
-  position: relative;
-  background: url(../images/wallan.png) #efefef no-repeat center center;
-  background-size: 50%;
-}
+
 content.feed-list-container .middle_mode .list_img_holder {
   overflow: hidden;
   width: 33%;
@@ -368,8 +365,8 @@ content.feed-list-container .list_bottom {
 content.feed-list-container .list_bottom a {
   display: block;
   color: #999;
-  font-size: 32px;
-  line-height: 96px;
+  font-size: 16px;
+  line-height: 48px;
   text-decoration: none;
 }
 

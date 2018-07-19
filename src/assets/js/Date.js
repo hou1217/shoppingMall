@@ -1,3 +1,23 @@
+// 对剩余的时间进行判断处理
+export function dealTime(time){
+  let timeStamp = ~~(new Date()/1000);//当前时间戳（秒）
+  let restSeconds =  time - timeStamp;//剩余多少秒
+  let result = '';
+  if(restSeconds < 0){
+    restSeconds = 0;
+  }
+  let hourTime = restSeconds/3600;
+  let dayTime = 0;
+  if(hourTime > 24){
+    dayTime = parseInt(hourTime / 24);
+    hourTime = parseInt(hourTime % 24);
+  }
+
+  result=   dayTime + "天"+hourTime + "小时"
+
+  
+  return  result;
+}
 export function formatDate (date, fmt) {
     if (/(y+)/.test(fmt)) {
         fmt = fmt.replace(RegExp.$1, (date.getFullYear() + '').substr(4 - RegExp.$1.length));

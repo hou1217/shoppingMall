@@ -25,11 +25,12 @@
           <transition enter-active-class="bounceInLeft" leave-active-class="bounceOutRight">
             <ul class="list-content animated">
               
-              <li v-for="(item,index) in goodsList" :key="index">
-                <router-link :to="{
+              <li v-for="(item,index) in goodsList" :key="index" @click="getIntoDetail(item.goodId)">
+                <!-- <router-link :to="{
                   path:'/detail',
                   query:{goodId:item.goodId}
-                  }" class="article_link clearfix ">
+                  }" class="article_link clearfix "> -->
+                <a href="javascript:;" class="article_link clearfix ">
                   <div class="list_img_holder">
                     <img :src="item.pic">
                     <span class="rest-number">仅剩{{item.restNum}}件</span>
@@ -53,7 +54,8 @@
                       
                     </p>
                   </div>
-                </router-link>
+                </a>
+                <!-- </router-link> -->
               </li>
               
             </ul>
@@ -95,6 +97,10 @@ export default {
   
   
   methods:{
+    getIntoDetail(id){
+      //进入详情
+      this.$router.push('/detail?goodId='+id);
+    },
     loadMore() {
       this.loading = true;
       // 加载更多的数据
@@ -157,6 +163,7 @@ export default {
     },
     getDatas(pay){
       //滚动条回到顶部
+      this.loaded = false;
       document.body.scrollTop = document.documentElement.scrollTop = 0;
       if(this.flag2){
         this.flag2 = false;
@@ -173,17 +180,19 @@ export default {
             //当没有数据或者数据为0的时候，显示'暂无数据'，'加载中'不显示
             if(!res.data.data || res.data.data.length == 0){
               this.noData = true;
-              this.loaded = true;
+              
             }
             
             this.goodsList = res.data.data;
             console.log(this.goodsList);
+            this.loaded = true;
             //本地session存储
             sessionStorage.setItem("data",JSON.stringify(this.goodsList));  
         }).catch((error) =>{
           console.log(error);
         });
         this.flag2 = true;
+        
       }
      
     },
@@ -204,11 +213,11 @@ export default {
         if(res.data.data){
           if(res.data.data.length == 0){
             setTimeout(function(){
-              _this.loaded = true;
+             
               _this.noMore = true;
             },700);
           }
-        
+          this.loaded = true;
           console.log("在原数组后面添加新数据");
           this.goodsList = this.goodsList.concat(res.data.data);
         }
@@ -260,6 +269,7 @@ export default {
         if(from.name === 'Detail' && to.name === 'Home'){
           console.log('从详情页返回home页！');
           //打开开关
+          this.loaded = true;
           this.sw = true;
           return false;
         }else if(to.name === 'Detail' && from.name === 'Home'){
@@ -283,8 +293,6 @@ export default {
   data () {
     return {
       goodsList:[],//商品数据列表
-      day:0,
-      hour:0,
       loading:false,
 
       isRotate:false,
@@ -329,6 +337,8 @@ export default {
   }
   
   content.feed-list-container .list_img_holder {
+    max-height: 172px;
+    overflow: hidden;
     position: relative;
     background: url(../assets/images/wallan.png) #efefef no-repeat center center;
     background-size: 50%;

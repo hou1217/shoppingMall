@@ -64,8 +64,6 @@
 	    return {
         currNum:1,
         jsonData:{},
-        day:0,
-        hour:0,
 	      isShow:true,
 	      
 	    }
@@ -81,35 +79,15 @@
 	      console.log("加载详情");
 	      const options = {
           method: 'GET',
-          url:this.$global.serverUrl+'/mall-app/mall/product/detail?goodId=5b50367241eeba3394ad691e'
+          url:this.$global.serverUrl+'/ajax/product/detail?goodId='+pay.kind
         };
         console.log(options);
         this.$axios(options).then((res) =>{
           console.log(res.data);
+          this.jsonData = res.data.data;
         }).catch((error) => {
           console.log(error);
         });
-        this.jsonData = {
-          "advPic":"http://p93yanyc8.bkt.clouddn.com/80ea6cdb-b960-4938-b368-54ac8d7d1a55",
-          "desc":"山寨机就是牛",
-          "name":"iphone",
-          "photos":[
-            {"url":"http://p93yanyc8.bkt.clouddn.com/36a7ed40-b361-4f33-9277-75af4cbd58e0"},
-            {"url":"http://p93yanyc8.bkt.clouddn.com/a9a2bf45-db93-421f-aef1-aadc50a2ae91"},
-            {"url":"http://p93yanyc8.bkt.clouddn.com/36a7ed40-b361-4f33-9277-75af4cbd58e0"},
-            {"url":"http://p93yanyc8.bkt.clouddn.com/a9a2bf45-db93-421f-aef1-aadc50a2ae91"},
-            {"url":"http://p93yanyc8.bkt.clouddn.com/36a7ed40-b361-4f33-9277-75af4cbd58e0"},
-          ],
-          "restTime":1532848337,
-          "items":[
-            {"icon":"http://p93yanyc8.bkt.clouddn.com/219c6973-fa55-42cd-b73a-ff781e4248c6","itemName":"卡片","num":3,"type":"kapian"},
-            {"icon":"http://p93yanyc8.bkt.clouddn.com/e81ead5e-214f-464e-8056-6889acc6b178","itemName":"金币","num":5,"type":"gold"}
-          ]
-        }
-        console.log(this.jsonData);
-        
-        this.day = dealTime(this.jsonData.restTime).dayTime;
-        this.hour = dealTime(this.jsonData.restTime).hourTime;
       },
 	  },
 	  mounted(){

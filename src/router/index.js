@@ -5,9 +5,7 @@ import Home from '@/views/Home'
 
 import Detail from '@/views/Detail'
 
-import Fail from '@/views/Fail'
-import Login from '@/views/Login'
-import md5 from 'js-md5'
+import Fail from '@/views/404'
 
 
 Vue.use(Router)
@@ -31,26 +29,28 @@ const router = new Router({
       }
     },
     {
-      path: '/fail',
-      name: 'Fail',
+      path: '/404',
+      name: '404',
       component: Fail,
     },
     {
-      path:'/login',
-      name:'Login',
-      component:Login,
-      meta: {
-        keepAlive: false
-      }
+      path: '/',
+      meta: { redirect: true }
     },
     {
-      path: '/',
-      redirect: '/home/recommend?category=推荐',
-    },
+      path: '*',
+      redirect: '/404'
+    }
 
   ]
 })
-
+router.beforeEach((to, from, next) => {
+  if(to.meta.redirect){
+    next('/home/recommend?category=推荐')
+  }else{
+    next()
+  }
+})
 
 
 export default router

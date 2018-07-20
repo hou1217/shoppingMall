@@ -16,9 +16,21 @@
       <div id="content1" ref="content1">
         <content id="pageletListContent" class="feed-list-container">
           <transition enter-active-class="bounceInLeft" leave-active-class="bounceOutRight">
-            <ul class="list-content animated">
+            
+            <div class="list-content animated">
               
-              <li v-for="(item,index) in goodsList" :key="index" @click="getIntoDetail(item.goodId)">
+                <ul class="left fl">
+
+                </ul>
+                
+              
+              
+                <ul class="right fl">
+
+                </ul>
+              
+              <ul class="list fl" >
+              <li v-for="(item,index) in goodsList" :key="index" @click="getIntoDetail(item.goodId)" >
                 <!-- <router-link :to="{
                   path:'/detail',
                   query:{goodId:item.goodId}
@@ -50,8 +62,8 @@
                 </a>
                 <!-- </router-link> -->
               </li>
-              
-            </ul>
+              </ul>
+            </div>
           </transition>
           <div class="list_bottom">
             <section class="loadmoretip" v-show="!loaded">
@@ -155,6 +167,7 @@ export default {
       ];
     },
     getDatas(pay){
+      var _this = this;
       //滚动条回到顶部
       this.loaded = false;
       document.body.scrollTop = document.documentElement.scrollTop = 0;
@@ -165,7 +178,7 @@ export default {
         //ajax
         const options = {
           method: 'GET',
-          url:this.$global.serverUrl+"/ajax/product/list?category="+pay.kind
+          url:this.$global.serverUrl+"/mall-app/mall/product/list?category="+pay.kind
         };
         console.log(options);
         this.$axios(options).then((res) =>{
@@ -176,6 +189,8 @@ export default {
               
             }
             
+
+
             this.goodsList = res.data.data;
             console.log(this.goodsList);
             this.loaded = true;
@@ -185,7 +200,178 @@ export default {
           console.log(error);
         });
         this.flag2 = true;
-        
+        this.goodsList = [
+{
+"goodId":"5b5036a841eeba3394ad6920",
+"pic":"http://p93yanyc8.bkt.clouddn.com/a9a2bf45-db93-421f-aef1-aadc50a2ae91",
+"name":"mac Pro",
+"restNum":9,
+"restTime":1532848337,
+"items":[
+{
+"icon":"http://p93yanyc8.bkt.clouddn.com/219c6973-fa55-42cd-b73a-ff781e4248c6",
+"itemName":"卡片",
+"num":3,
+"type":"kapian"
+},
+{
+"icon":"http://p93yanyc8.bkt.clouddn.com/e81ead5e-214f-464e-8056-6889acc6b178",
+"itemName":"金币",
+"num":5,
+"type":"gold"
+},
+{
+"icon":"http://p93yanyc8.bkt.clouddn.com/e81ead5e-214f-464e-8056-6889acc6b178",
+"itemName":"金币",
+"num":5222,
+"type":"gold"
+},
+{
+"icon":"http://p93yanyc8.bkt.clouddn.com/219c6973-fa55-42cd-b73a-ff781e4248c6",
+"itemName":"卡片",
+"num":2223,
+"type":"kapian"
+},
+{
+"icon":"http://p93yanyc8.bkt.clouddn.com/e81ead5e-214f-464e-8056-6889acc6b178",
+"itemName":"金币",
+"num":5222,
+"type":"gold"
+}
+]
+},
+{
+"goodId":"5b5036a841eeba3394ad6921",
+"pic":"http://p93yanyc8.bkt.clouddn.com/36a7ed40-b361-4f33-9277-75af4cbd58e0",
+"name":"iphone",
+"restNum":12,
+"restTime":1532899997,
+"items":[
+{
+"icon":"http://p93yanyc8.bkt.clouddn.com/219c6973-fa55-42cd-b73a-ff781e4248c6",
+"itemName":"卡片",
+"num":3222,
+"type":"kapian"
+},
+
+]
+},
+{
+"goodId":"5b5036a841eeba3394ad6920",
+"pic":"http://p93yanyc8.bkt.clouddn.com/a9a2bf45-db93-421f-aef1-aadc50a2ae91",
+"name":"mac Pro",
+"restNum":9,
+"restTime":1532848337,
+"items":[
+{
+"icon":"http://p93yanyc8.bkt.clouddn.com/219c6973-fa55-42cd-b73a-ff781e4248c6",
+"itemName":"卡片",
+"num":3,
+"type":"kapian"
+},
+{
+"icon":"http://p93yanyc8.bkt.clouddn.com/e81ead5e-214f-464e-8056-6889acc6b178",
+"itemName":"金币",
+"num":5,
+"type":"gold"
+}
+]
+},
+{
+"goodId":"5b5036a841eeba3394ad6920",
+"pic":"http://p93yanyc8.bkt.clouddn.com/a9a2bf45-db93-421f-aef1-aadc50a2ae91",
+"name":"mac Pro",
+"restNum":9,
+"restTime":1532848337,
+"items":[
+{
+"icon":"http://p93yanyc8.bkt.clouddn.com/219c6973-fa55-42cd-b73a-ff781e4248c6",
+"itemName":"卡片",
+"num":3222,
+"type":"kapian"
+},
+{
+"icon":"http://p93yanyc8.bkt.clouddn.com/e81ead5e-214f-464e-8056-6889acc6b178",
+"itemName":"金币",
+"num":52222,
+"type":"gold"
+},
+{
+"icon":"http://p93yanyc8.bkt.clouddn.com/219c6973-fa55-42cd-b73a-ff781e4248c6",
+"itemName":"卡片",
+"num":3222,
+"type":"kapian"
+},
+{
+"icon":"http://p93yanyc8.bkt.clouddn.com/e81ead5e-214f-464e-8056-6889acc6b178",
+"itemName":"金币",
+"num":52222,
+"type":"gold"
+}
+]
+},
+{
+"goodId":"5b5036a841eeba3394ad6920",
+"pic":"http://p93yanyc8.bkt.clouddn.com/a9a2bf45-db93-421f-aef1-aadc50a2ae91",
+"name":"mac Pro",
+"restNum":9,
+"restTime":1532848337,
+"items":[
+{
+"icon":"http://p93yanyc8.bkt.clouddn.com/219c6973-fa55-42cd-b73a-ff781e4248c6",
+"itemName":"卡片",
+"num":3,
+"type":"kapian"
+},
+{
+"icon":"http://p93yanyc8.bkt.clouddn.com/e81ead5e-214f-464e-8056-6889acc6b178",
+"itemName":"金币",
+"num":5,
+"type":"gold"
+}
+]
+},
+{
+"goodId":"5b5036a841eeba3394ad6920",
+"pic":"http://p93yanyc8.bkt.clouddn.com/a9a2bf45-db93-421f-aef1-aadc50a2ae91",
+"name":"mac Pro",
+"restNum":9,
+"restTime":1532848337,
+"items":[
+{
+"icon":"http://p93yanyc8.bkt.clouddn.com/219c6973-fa55-42cd-b73a-ff781e4248c6",
+"itemName":"卡片",
+"num":3,
+"type":"kapian"
+},
+{
+"icon":"http://p93yanyc8.bkt.clouddn.com/e81ead5e-214f-464e-8056-6889acc6b178",
+"itemName":"金币",
+"num":5,
+"type":"gold"
+}
+]
+},
+];
+
+                            setTimeout(function(){
+                                var aLi = document.querySelectorAll('.list li');
+                                console.log(aLi.length);
+                                var oLeft = document.querySelector('.left');
+                                var oRight = document.querySelector('.right');
+                                var aImg = document.querySelectorAll('.list li img');
+                                
+                                for(var i=0;i<aLi.length;i++){
+                                  console.log(oLeft.offsetHeight);
+                                  console.log(oRight.offsetHeight);
+                                    if(oLeft.offsetHeight > oRight.offsetHeight){
+                                        oRight.appendChild(aLi[i]);
+                                        
+                                    }else{
+                                        oLeft.appendChild(aLi[i]);
+                                    }
+                                }
+                            },50)
       }
      
     },
@@ -195,7 +381,7 @@ export default {
       this.noData = false;
       const options = {
         method: 'GET',
-        url:this.$global.serverUrl+"/ajax/product/list?category="+payload.kind+"&cursor=''"
+        url:this.$global.serverUrl+"/mall-app/mall/product/list?category="+payload.kind+"&cursor=''"
       };
       console.log(options);
       this.$axios(options).then((res) =>{
@@ -382,5 +568,7 @@ export default {
     color:#FDC223;
   }
 
-
+  .fl{
+    width: calc((100% - 9px)/2);
+  }
 </style>

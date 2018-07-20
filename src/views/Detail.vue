@@ -79,7 +79,7 @@
 	      console.log("加载详情");
 	      const options = {
           method: 'GET',
-          url:this.$global.serverUrl+'/ajax/product/detail?goodId='+pay.kind
+          url:this.$global.serverUrl+'/mall-app/mall/product/detail?goodId='+pay.kind
         };
         console.log(options);
         this.$axios(options).then((res) =>{

@@ -13,8 +13,8 @@ module.exports = {
     proxyTable: {},
 
     // Various Dev Server settings
-    host: '192.168.2.209', // can be overwritten by process.env.HOST
-    port: 8085, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
+    host: '127.0.0.1', // can be overwritten by process.env.HOST
+    port: 8086, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
     autoOpenBrowser: true,
     errorOverlay: true,
     notifyOnErrors: true,
@@ -47,17 +47,17 @@ module.exports = {
     fatEnv: {
       NODE_ENV: '"fat"',
       EVN_CONFIG:'"fat"',
-      API_ROOT:'"http://media.dc.wallan-tech.com"'
+      API_ROOT:'"https://wander.wallan-tech.com:1443"'
     },
     uatEnv: {
       NODE_ENV: '"uat"',
       EVN_CONFIG:'"uat"',
-      API_ROOT:'"http://media.dc.wallan-tech.com"'
+      API_ROOT:'"https://wander.wallan-tech.com:1443"'
     },
     prodEnv: {
       NODE_ENV: '"production"',
       EVN_CONFIG:'"prod"', 
-      API_ROOT:'"http://media.dc.wallan-tech.com"',
+      API_ROOT:'"https://wander.wallan-tech.com:1443"',
     },
     
     

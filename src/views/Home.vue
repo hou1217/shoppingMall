@@ -12,14 +12,7 @@
       </div>
     </div>
     <div id="content0" ref="content0" class="content0" >
-      <!-- <div class="scroll_bar">
-        <div class="bar1" v-if="status1">⇣</div>
-        <div class="bar1" v-if="status2">⇡</div>
-        <div class="bar1" v-if="status3"><img src="../assets/images/onload.gif" alt="加载中" width="38"></div>
-        <div class="bar2" v-if="status1">下拉刷新</div>
-        <div class="bar2" v-if="status2">释放刷新</div>
-        <div class="bar2" v-if="status3">正在加载</div>
-      </div> -->
+      
       <div id="content1" ref="content1">
         <content id="pageletListContent" class="feed-list-container">
           <transition enter-active-class="bounceInLeft" leave-active-class="bounceOutRight">

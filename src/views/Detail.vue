@@ -41,8 +41,13 @@
      
     </section>
     <section class="content">
+      <div class="top">
+        
+        <p><i class="line">——</i>&nbsp;&nbsp;&nbsp;图文详情&nbsp;&nbsp;&nbsp;<i class="line">——</i></p>
+        
+      </div>
       <div class="img-wrap">
-        <img :src="jsonData.advPic">
+        <img :src="pic.url" v-for="(pic,index) in jsonData.advPics" :key="index">
       </div>
     </section>
   </div>
@@ -103,6 +108,21 @@
 </script>
 
 <style scoped>
+.top{
+  text-align: center;
+  background: #F4F6FA;
+  width: 100%;
+  height: 44px;
+}
+.top p{
+  font-size: 15px;
+  color: #8D93A4;
+  
+  padding-top:10px
+}
+.top p .line{
+  color:#DCDEE6
+}
 .container{
   width: 100%;
   height: auto;
@@ -187,9 +207,9 @@
 }
 .cards span em{
   padding-left: 3px;
-  font-size: 16px;
+  font-size: 14px;
   font-style: normal;
-  color: #343C4F;
+  color: #666;
   line-height: 16px;
 }
 .cards span .gold {

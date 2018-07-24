@@ -26,7 +26,7 @@
                 <a href="javascript:;" class="article_link clearfix ">
                   <div class="list_img_holder">
                     <img :src="item.pic">
-                    <span class="rest-number">仅剩{{item.restNum}}件</span>
+                    <!-- <span class="rest-number">仅剩{{item.restNum}}件</span> -->
                   </div>
                   <div class="item_info">
                     <p class="name">
@@ -58,7 +58,7 @@
               <a href="#">加载中...</a>
             </section>
             <section class="loadmoretip" v-show="noMore">
-              <a href="#">没有更多了</a>
+              <a href="#">别扯了，已经到底线啦~</a>
             </section>
             <section class="loadmoretip" v-show="noData">
               <a href="#">暂无数据</a>
@@ -91,8 +91,11 @@ export default {
   
   methods:{
     getIntoDetail(id){
+      //window.webkit.messageHandlers.Mobile.postMessage({body:'/detail?goodId='+id});
       //进入详情
+      //window.location.href = 'goodId'+ id;
       this.$router.push('/detail?goodId='+id);
+
     },
     loadMore() {
       this.loading = true;
@@ -165,7 +168,10 @@ export default {
         //ajax
         const options = {
           method: 'GET',
-          url:this.$global.serverUrl+"/mall-app/mall/product/list?category="+pay.kind
+          url:this.$global.serverUrl+"/mall-app/mall/product/list",
+          params:{
+            category:pay.kind
+          }
         };
         console.log(options);
         this.$axios(options).then((res) =>{
@@ -176,8 +182,10 @@ export default {
               
             }
             
-            this.goodsList = res.data.data;
-            console.log(this.goodsList);
+            this.goodsList = res.data.data.products;
+            this.cursor = res.data.data.cursor;
+            this.sortNum = res.data.data.sortNum;
+            // console.log(this.goodsList);
             this.loaded = true;
             //本地session存储
             sessionStorage.setItem("data",JSON.stringify(this.goodsList));  
@@ -195,7 +203,12 @@ export default {
       this.noData = false;
       const options = {
         method: 'GET',
-        url:this.$global.serverUrl+"/mall-app/mall/product/list?category="+payload.kind+"&cursor=''"
+        url:this.$global.serverUrl+"/mall-app/mall/product/list",
+        params:{
+          category:payload.kind,
+          cursor:this.cursor,
+          sortNum:this.sortNum
+        }
       };
       console.log(options);
       this.$axios(options).then((res) =>{
@@ -203,8 +216,8 @@ export default {
         
         // 将新获取的数据加入到vue中的data，就会反应到视图中了
         let _this = this;
-        if(res.data.data){
-          if(res.data.data.length == 0){
+        if(res.data.data.products){
+          if(res.data.data.products.length == 0){
             setTimeout(function(){
              
               _this.noMore = true;
@@ -212,7 +225,9 @@ export default {
           }
           this.loaded = true;
           console.log("在原数组后面添加新数据");
-          this.goodsList = this.goodsList.concat(res.data.data);
+          this.goodsList = this.goodsList.concat(res.data.data.products);
+          this.sortNum = res.data.data.sortNum;
+          this.cursor = res.data.data.cursor;
         }
         // 数据更新完毕，将开关打开  
         this.sw = true; 
@@ -285,6 +300,8 @@ export default {
   },
   data () {
     return {
+      cursor:'',
+      sortNum:0,
       goodsList:[],//商品数据列表
       loading:false,
 
@@ -373,9 +390,9 @@ export default {
   }
   .cards span em{
     padding-left: 3px;
-    font-size: 16px;
+    font-size: 13px;
     font-style: normal;
-    color: #343C4F;
+    color: #666;
     line-height: 16px;
   }
   .cards span .gold {

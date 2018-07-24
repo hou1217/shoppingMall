@@ -23,7 +23,7 @@ module.exports = {
     env:{
       NODE_ENV: '"development"',
       API_ROOT: '"http://jixiaosong.dev.dc.wallan-tech.com"',
-      //API_ROOT:'"http://wander.dev.wallan.tech"'
+      //API_ROOT:'"https://wander.wallan-tech.com:1443"'
     },
     
     /**

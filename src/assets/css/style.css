@@ -224,11 +224,11 @@ content.feed-list-container .list-content {
   -webkit-user-select: none;
   display:flex;
   flex-flow:row wrap;
-  /* align-items:flex-start; */
+  align-items:flex-start;
   justify-content:space-between;
 }
 content.feed-list-container .list-content li{
-  width: calc((100% - 9px)/2);
+  /* width: calc((100% - 9px)/2); */
   /* float: left; */
   margin-bottom:10px;
   background: #FFFFFF;

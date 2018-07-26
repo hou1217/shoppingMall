@@ -20,51 +20,57 @@
       <div id="content1" ref="content1">
         <content id="pageletListContent" class="feed-list-container">
           <transition enter-active-class="bounceInLeft" leave-active-class="bounceOutRight">
-            <ul class="list-content animated">
-              
-              <li v-for="(item,index) in goodsList" :key="index" @click="getIntoDetail(item.goodId)">
-                <!-- <router-link :to="{
-                  path:'/detail',
-                  query:{goodId:item.goodId}
-                  }" class="article_link clearfix "> -->
-                <a href="javascript:;" class="article_link clearfix ">
-                  <div class="list_img_holder">
-                    <img :src="item.pic">
-                    <!-- <span class="rest-number">仅剩{{item.restNum}}件</span> -->
-                  </div>
-                  <div class="item_info">
-                    <p class="name">
-                      {{item.name}}
-                    </p>
-                    <p class="rest-time">
-                      还剩{{item.restTime | formatDate}}
-                    </p>
-                    <p class="cards">
+            <div class="list-content animated">
+              <ul class="left fl">
+              </ul>
+              <ul class="right fl">
+              </ul>
+              <ul class="list">
+                
+                <li v-for="(item,index) in goodsList" :key="index" @click="getIntoDetail(item.goodId)">
+                  <!-- <router-link :to="{
+                    path:'/detail',
+                    query:{goodId:item.goodId}
+                    }" class="article_link clearfix "> -->
+                  <a href="javascript:;" class="article_link clearfix ">
+                    <div class="list_img_holder">
+                      <img :src="item.pic">
+                      <!-- <span class="rest-number">仅剩{{item.restNum}}件</span> -->
+                    </div>
+                    <div class="item_info">
+                      <p class="name">
+                        {{item.name}}
+                      </p>
+                      <p class="rest-time">
+                        还剩{{item.restTime | formatDate}}
+                      </p>
+                      <p class="cards">
 
-                      <span v-for="(icon,index) in item.items" :key="index">
-                        <img v-if="icon.type == 'kapian'" :src="icon.icon">
-                        <img v-else-if="icon.type == 'gold'" :src="icon.icon" class="card">
+                        <span v-for="(icon,index) in item.items" :key="index">
+                          <img v-if="icon.type == 'kapian'" :src="icon.icon">
+                          <img v-else-if="icon.type == 'gold'" :src="icon.icon" class="card">
+                          
+                          <!-- <i v-if="icon.type == 'kapian'">{{icon.itemName}}</i> -->
+                          <em v-if="icon.type == 'kapian'">x{{icon.num}}</em>
+                          <em v-else-if="icon.type == 'gold'" class="gold">{{icon.num}}</em>
+                          <em v-else class="price">￥{{icon.num}}</em>
+                        </span>
                         
-                        <!-- <i v-if="icon.type == 'kapian'">{{icon.itemName}}</i> -->
-                        <em v-if="icon.type == 'kapian'">x{{icon.num}}</em>
-                        <em v-else-if="icon.type == 'gold'" class="gold">{{icon.num}}</em>
-                        <em v-else class="price">￥{{icon.num}}</em>
-                      </span>
-                      
-                    </p>
-                  </div>
-                </a>
-                <!-- </router-link> -->
-              </li>
-              
-            </ul>
+                      </p>
+                    </div>
+                  </a>
+                  <!-- </router-link> -->
+                </li>
+                
+              </ul>
+            </div>
           </transition>
           <div class="list_bottom">
             <section class="loadmoretip" v-show="!loaded">
               <a href="#">加载中...</a>
             </section>
             <section class="loadmoretip" v-show="noMore">
-              <a href="#">别扯了，已经到底线啦~</a>
+              <a href="#">已经到底线啦~</a>
             </section>
             <section class="loadmoretip" v-show="noData">
               <a href="#">暂无数据</a>
@@ -211,6 +217,21 @@ export default {
             this.loaded = true;
             //本地session存储
             sessionStorage.setItem("data",JSON.stringify(this.goodsList));  
+            setTimeout(function(){
+              var aLi = document.querySelectorAll('.list li');
+              var oLeft = document.querySelector('.left');
+              var oRight = document.querySelector('.right');
+              for(var i=0;i<aLi.length;i++){
+                // console.log(oLeft.offsetHeight);
+                // console.log(oRight.offsetHeight);
+                  if(oLeft.offsetHeight > oRight.offsetHeight){
+                      oRight.appendChild(aLi[i]);
+                      
+                  }else{
+                      oLeft.appendChild(aLi[i]);
+                  }
+              }
+            },50)
         }).catch((error) =>{
           console.log(error);
         });
@@ -247,14 +268,36 @@ export default {
           }
           this.loaded = true;
           console.log("在原数组后面添加新数据");
+          // this.goodsList = this.goodsList.concat(res.data.data.products);
           this.goodsList = this.goodsList.concat(res.data.data.products);
           this.sortNum = res.data.data.sortNum;
           this.cursor = res.data.data.cursor;
           //本地session存储
           sessionStorage.setItem("data",JSON.stringify(this.goodsList)); 
+          setTimeout(function(){
+            var aLi = document.querySelectorAll('.list li');
+            var oLeft = document.querySelector('.left');
+            var oRight = document.querySelector('.right');
+            for(var i=0;i<aLi.length;i++){
+              // console.log(oLeft.offsetHeight);
+              // console.log(oRight.offsetHeight);
+                if(oLeft.offsetHeight > oRight.offsetHeight){
+                    oRight.appendChild(aLi[i]);
+                    
+                }else{
+                    oLeft.appendChild(aLi[i]);
+                }
+            }
+          },50)
+          // 数据更新完毕，将开关打开
+          this.sw = true; 
+        }else{
+          console.log('没有更多的数据了');
+          this.loaded = true;
+          this.noMore = true;
         }
-        // 数据更新完毕，将开关打开  
-        this.sw = true; 
+          
+       
         
       }).catch((error) =>{  
         console.log(error);  
@@ -364,7 +407,12 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-  
+  .fl{
+    width: calc((100% - 9px)/2);
+  }
+  .list{
+    display: none;
+  }
   .top_menu_bar .top_menu_list .btn.router-link-active{
     font-weight: bold;
     color:#2CBE61;

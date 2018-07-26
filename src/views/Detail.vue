@@ -29,12 +29,13 @@
       </span>
       <div class="cards">
 
-        <span v-for="(item,index) in jsonData.items" :key="index">
-          <img v-if="item.type == 'kapian'" :src="item.icon">
-          <img v-else :src="item.icon" class="card">
-          <i v-if="item.type == 'kapian'">{{item.itemName}}</i>
-          <em v-if="item.type == 'kapian'">x{{item.num}}</em>
-          <em v-else class="gold">{{item.num}}</em>
+        <span v-for="(icon,index) in jsonData.items" :key="index">
+          <img v-if="icon.type == 'kapian'" :src="icon.icon">
+          <img v-else-if="icon.type == 'gold'" :src="icon.icon" class="card">
+          <!-- <i v-if="item.type == 'kapian'">{{item.itemName}}</i> -->
+          <em v-if="icon.type == 'kapian'">x{{icon.num}}</em>
+          <em v-else-if="icon.type == 'gold'" class="gold">{{icon.num}}</em>
+          <em v-else class="price">￥{{icon.num}}</em>
         </span>
         
       </div>
@@ -173,6 +174,7 @@
   margin-top:7px;
   margin-bottom: 7px;
   font-size: 15px;
+  font-weight: normal;
   color: #8D93A4;
   text-align: justify;
   line-height: 19px;
@@ -191,29 +193,33 @@
   margin-right: 10px;
 }
 .cards span img{
-  margin-bottom:-3px;
-  width: 16px;
-  height: 16px;
+  margin-bottom:-1px;
+  width: 13px;
+  height: 13px;
 }
 .cards span img.card{
-  margin-bottom:-2px;
+  margin-bottom:-1px;
 }
 .cards span i{
   padding-left: 3px;
   font-size: 12px;
   font-style: normal;
   color: #343C4F;
-  line-height: 12px;
+  /* line-height: 12px; */
 }
 .cards span em{
-  padding-left: 3px;
+  margin-left: -2px;
+  /* padding-left: 2px; */
   font-size: 14px;
   font-style: normal;
   color: #666;
-  line-height: 16px;
+  /* line-height: 16px; */
 }
 .cards span .gold {
   color:#FDC223;
+}
+.cards span .price {
+  color: #E93A0F;
 }
 .content{
     width: 100%;

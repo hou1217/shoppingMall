@@ -2,13 +2,17 @@
   <div class="indexContainer">
     <div class="top_menu_bar">
       <div class="top_menu_list">
-        <router-link 
-        :to="{path:item.url,query:{category:item.type}}" 
-        class="btn"
-        v-for='(item,index) in navbar' 
-        :key="index" >
-          {{item.type}}
-        </router-link>
+        <div class="menu-list">
+          <router-link 
+          :to="{path:item.url,query:{category:item.type}}" 
+          class="btn"
+          v-for='(item,index) in navbar' 
+          :key="index" >
+            {{item.type}}
+            <div class="line"></div>
+          </router-link>
+        </div>  
+        
       </div>
     </div>
     <div id="content0" ref="content0" class="content0" >
@@ -39,10 +43,12 @@
 
                       <span v-for="(icon,index) in item.items" :key="index">
                         <img v-if="icon.type == 'kapian'" :src="icon.icon">
-                        <img v-else :src="icon.icon" class="card">
+                        <img v-else-if="icon.type == 'gold'" :src="icon.icon" class="card">
+                        
                         <!-- <i v-if="icon.type == 'kapian'">{{icon.itemName}}</i> -->
                         <em v-if="icon.type == 'kapian'">x{{icon.num}}</em>
-                        <em v-else class="gold">{{icon.num}}</em>
+                        <em v-else-if="icon.type == 'gold'" class="gold">{{icon.num}}</em>
+                        <em v-else class="price">￥{{icon.num}}</em>
                       </span>
                       
                     </p>
@@ -130,32 +136,48 @@ export default {
    
     loadNavBar(){
       console.log("加载导航栏完毕");
-      this.navbar = [
-        {
-          url:'/home/recommend',
-          type:'推荐'
-        },
-        {
-          url:'/home/phone',
-          type:'手机'
-        },
-        {
-          url:'/home/ornament',
-          type:'饰品'
-        },
-        {
-          url:'/home/electrical',
-          type:'家电'
-        },
-        {
-          url:'/home/furnishing',
-          type:'家居'
-        },
-        {
-          url:'/home/wash',
-          type:'洗护'
-        },
-      ];
+      //ajax
+      const options = {
+        method: 'GET',
+        url:this.$global.serverUrl+"/mall-app/mall/product/category",
+      };
+      console.log(options);
+      this.$axios(options).then((res) =>{
+          console.log(res.data);
+          this.navbar = res.data.data;
+      }).catch((error) =>{
+        console.log(error);
+      });
+      // this.navbar = [
+      //   {
+      //     url:'/home/recommend',
+      //     type:'推荐'
+      //   },
+      //   {
+      //     url:'/home/phone',
+      //     type:'手机'
+      //   },
+      //   {
+      //     url:'/home/electrical',
+      //     type:'家电'
+      //   },
+      //   {
+      //     url:'/home/computer',
+      //     type:'电脑'
+      //   },
+      //   {
+      //     url:'/home/digital',
+      //     type:'数码'
+      //   },
+      //   {
+      //     url:'/home/hand',
+      //     type:'手办'
+      //   },
+      //   {
+      //     url:'/home/anime',
+      //     type:'动漫'
+      //   },
+      // ];
     },
     getDatas(pay){
       //滚动条回到顶部
@@ -228,6 +250,8 @@ export default {
           this.goodsList = this.goodsList.concat(res.data.data.products);
           this.sortNum = res.data.data.sortNum;
           this.cursor = res.data.data.cursor;
+          //本地session存储
+          sessionStorage.setItem("data",JSON.stringify(this.goodsList)); 
         }
         // 数据更新完毕，将开关打开  
         this.sw = true; 
@@ -342,11 +366,24 @@ export default {
 <style scoped>
   
   .top_menu_bar .top_menu_list .btn.router-link-active{
+    font-weight: bold;
     color:#2CBE61;
-    border-bottom:2px solid #2CBE61;
+    /* border-bottom:2px solid #2CBE61; */
   }
-  
+  .top_menu_bar .top_menu_list .btn.router-link-active .line{
+    background-color:#2CBE61; 
+    height: 2px;
+    width: 50%;
+    position: absolute;
+    left: calc(50%/2);
+    bottom:0;
+  }
+  .top_menu_bar .menu-list{
+    height: 37px;
+    overflow-x: scroll;
+  }
   content.feed-list-container .list_img_holder {
+    border-radius: 4px;
     max-height: 172px;
     overflow: hidden;
     position: relative;
@@ -372,11 +409,12 @@ export default {
   .cards span{
     display: inline-block;
     margin-right: 10px;
+    margin-bottom: 3px;
   }
   .cards span img{
-    margin-bottom:-3px;
-    width: 16px;
-    height: 16px;
+    margin-bottom:-1px;
+    width: 13px;
+    height: 13px;
   }
   .cards span img.card{
     margin-bottom:-2px;
@@ -389,15 +427,16 @@ export default {
     line-height: 12px;
   }
   .cards span em{
-    padding-left: 3px;
+    padding-left: 2px;
     font-size: 13px;
     font-style: normal;
     color: #666;
-    line-height: 16px;
   }
   .cards span .gold {
     color:#FDC223;
   }
-
+  .cards span .price {
+    color: #E93A0F;
+  }
 
 </style>

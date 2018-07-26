@@ -3,8 +3,9 @@
   padding: 0;
   border: 0;
 }
-html{
-  font-family:'PingFangSC-Medium','PingFangSC','STHeiti','Microsoft YaHei','Helvetica','Arial',sans-serif;
+html,body{
+  font-family:-apple-system,'PingFangSC-Medium','PingFangSC',
+  'STHeiti','Microsoft YaHei','Helvetica','Arial',sans-serif;
 }
 body {
   position: relative;
@@ -149,20 +150,23 @@ a {
   background-size: contain;
 }
 .top_menu_bar .top_menu_list {
-  border-bottom: 1px solid #DCDEE6;
+  height: 31px;
   overflow: hidden;
-  overflow-x: auto;
+  border-bottom: 0.5px solid #DCDEE6;
+  /* overflow-x: auto; */
   -webkit-overflow-scrolling: touch;
   white-space: nowrap;
    /* margin-top: 24px; */
    /* padding-bottom: 10px; */
 }
 .top_menu_bar .top_menu_list .btn {
+  position: relative;
   white-space: nowrap;
   display: inline-block;
   color: #8D93A4 ;
   text-decoration: none;
   font-size: 16px;
+  font-weight: normal;
   line-height: 31px;
   height: 31px;
   margin-right: 35px;
@@ -286,7 +290,7 @@ content.feed-list-container .item_info .name {
   -webkit-line-clamp: 2;
 }
 content.feed-list-container .item_info .rest-time {
-  color: #F2604D;
+  color: #8D93A4;
   font-size: 13px;
   margin-top: 7px;
 }

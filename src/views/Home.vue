@@ -432,11 +432,11 @@ export default {
   }
   content.feed-list-container .list_img_holder {
     border-radius: 4px;
-    max-height: 172px;
+    height: 172px;
     overflow: hidden;
     position: relative;
-    background: url(../assets/images/wallan.png) #efefef no-repeat center center;
-    background-size: 50%;
+    background: url(../assets/images/occupation_graph.png) #efefef no-repeat center center;
+    background-size: contain;
   }
   content.feed-list-container .list_img_holder span{
     padding: 5.5px 6.5px;
@@ -450,7 +450,6 @@ export default {
     color: #fff;
     font-size: 12px;
   }
-
   .cards{
     margin-top: 3px;
   }
@@ -486,5 +485,5 @@ export default {
   .cards span .price {
     color: #E93A0F;
   }
-
+  
 </style>
